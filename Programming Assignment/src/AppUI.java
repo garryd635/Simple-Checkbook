@@ -16,7 +16,7 @@ public class AppUI {
 	
 	//Instance variables
 	private JButton deposit,widthdrawl,back,submit,load,save;
-	private JPanel buttonPanelMain,buttonPanelTrans,bPDeposit, bPWidth,depositInput,widthdrawlInput,layout;
+	private JPanel buttonPanelMain,buttonPanelTrans,bPDeposit, bPWidth,depositInput,widthdrawlInput,layout,southLayout;
 	private JLabel nameLabel,nameLabel2, amtLabel, amtLabel2, balanceLabel;
 	private JTextField nameText, nameText2, amtText, amtText2;
 	private JFrame frame,popup;
@@ -68,7 +68,7 @@ public class AppUI {
 				state = "deposit";
 				bPDeposit.add(back);
 				bPDeposit.add(submit);
-				layout.remove(buttonPanelMain);
+				layout.remove(southLayout);
 				layout.add(depositInput, BorderLayout.NORTH);
 				layout.add(bPDeposit, BorderLayout.SOUTH);
 				layout.revalidate();
@@ -86,7 +86,7 @@ public class AppUI {
 				state = "widthdrawl";
 				bPWidth.add(back);
 				bPWidth.add(submit);
-				layout.remove(buttonPanelMain);
+				layout.remove(southLayout);
 				layout.add(widthdrawlInput, BorderLayout.NORTH);
 				layout.add(bPWidth, BorderLayout.SOUTH);
 				layout.revalidate();
@@ -104,7 +104,7 @@ public class AppUI {
 					scrollPane.setVisible(true);
 					layout.remove(bPDeposit);
 					layout.remove(depositInput);
-					layout.add(buttonPanelMain, BorderLayout.SOUTH);
+					layout.add(southLayout, BorderLayout.SOUTH);
 					layout.revalidate();
 					layout.repaint();
 				}
@@ -112,7 +112,7 @@ public class AppUI {
 					scrollPane.setVisible(true);
 					layout.remove(bPWidth);
 					layout.remove(widthdrawlInput);
-					layout.add(buttonPanelMain, BorderLayout.SOUTH);
+					layout.add(southLayout, BorderLayout.SOUTH);
 					layout.revalidate();
 					layout.repaint();
 				}
@@ -130,7 +130,7 @@ public class AppUI {
 					
 					layout.remove(bPDeposit);
 					layout.remove(depositInput);
-					layout.add(buttonPanelMain,BorderLayout.SOUTH);
+					layout.add(southLayout,BorderLayout.SOUTH);
 					cbManager.create(nameText.getText(), Double.parseDouble(amtText.getText()), "Deposit");
 					nameText.setText("");
 					amtText.setText("");
@@ -141,6 +141,8 @@ public class AppUI {
 					scrollPane.revalidate();
 					scrollPane.repaint();
 					scrollPane.setVisible(true);
+					southLayout.revalidate();
+					southLayout.repaint();
 					layout.revalidate();
 					layout.repaint();
 					}
@@ -148,7 +150,7 @@ public class AppUI {
 				if (state == "widthdrawl"){
 					layout.remove(bPWidth);
 					layout.remove(widthdrawlInput);
-					layout.add(buttonPanelMain, BorderLayout.SOUTH);
+					layout.add(southLayout, BorderLayout.SOUTH);
 					cbManager.create(nameText2.getText(), Double.parseDouble(amtText2.getText()), "Withdrawal");
 					nameText2.setText("");
 					amtText2.setText("");
@@ -159,6 +161,8 @@ public class AppUI {
 					scrollPane.revalidate();
 					scrollPane.repaint();
 					scrollPane.setVisible(true);
+					southLayout.revalidate();
+					southLayout.repaint();
 					layout.revalidate();
 					layout.repaint();
 				}
@@ -196,6 +200,7 @@ public class AppUI {
 		depositInput = new JPanel(new GridLayout(0,2));
 		widthdrawlInput = new JPanel(new GridLayout(0,2));
 		layout = new JPanel(new BorderLayout());
+		southLayout = new JPanel(new GridLayout(0,1));
 		
 		//Insert componenets into panels.
 		buttonPanelMain.add(deposit);
@@ -211,10 +216,11 @@ public class AppUI {
 		widthdrawlInput.add(amtLabel2);
 		widthdrawlInput.add(amtText2);
 		
-		layout.add(balanceLabel, BorderLayout.NORTH);
+		southLayout.add(balanceLabel);
+		southLayout.add(buttonPanelMain);
 		scrollPane = new JScrollPane(cbManager.getTable());
 		layout.add(scrollPane,BorderLayout.CENTER);
-		layout.add(buttonPanelMain, BorderLayout.SOUTH);
+		layout.add(southLayout, BorderLayout.SOUTH);
 		frame.add(layout);	
 	}//Constructor
 	
