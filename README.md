@@ -11,9 +11,7 @@ TBD
 ##Known Issues
  - There are currently no validations.  Wrong input in the wrong fields may result to strange behaviors
  - A Set amount of deposits/withdrawal logs can be stored
- - Current balance text overlaps other set text
 
 ##Next Steps
-- Reposition current balance text
 - Implement Valdidations
 - Reformat UI
